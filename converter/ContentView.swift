@@ -9,33 +9,40 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var input = 0.0
+    let screens: [SubScreen.Screens] = [.mylength, .myresolution, .mymass, .mytemp]
+    @State private var selection: SubScreen.Screens? = nil // nothing selected by default
     
-    var output: Double {
-        // this is wrong. this is the dpi value
-        // for 5.669 mm/pixel
-        let inch = input / 25.4
-        return inch
-    }
     var body: some View {
-        NavigationStack {
-            Form {
-                Section(header: Text("mm").textCase(.none)) {
-                    TextField("mm", value: $input, format: .number)
+        
+        // a property?
+        NavigationSplitView {
+            List(screens, id: \.self, selection: $selection) { screen in
+                NavigationLink(screen.description, value: screen)
+            } // List
+        } // NavigationSplitView
+        
+        // a property
+        detail: {
+            if let screen = selection {
+                
+                switch screen {
+                case .mylength:
+                    LengthView(subscreen: screen)
+                case .myresolution:
+                    ResolutionView(subscreen: screen)
+                case .mymass:
+                    MassView(subscreen: screen)
+                case .mytemp:
+                    TempView(subscreen: screen)
                 }
-                Section(header: Text("inch").textCase(.none)) {
-                    Text(output, format: .number)
-                }
-                Section(header: Text("mm per pixel").textCase(.none)) {
-                    TextField("mm", value: $input, format: .number)
-                }
-                Section(header: Text("inch").textCase(.none)) {
-                    Text(output, format: .number)
-                }
+            } else {
+                Text("Pick a screen")
             }
-        }
-    }
-}
+        } // resolutionView
+        
+    }// body
+    
+}  // View
 
 #Preview {
     ContentView()
