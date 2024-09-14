@@ -16,6 +16,12 @@ struct ContentView: View {
         
         // a property?
         NavigationSplitView {
+            
+            Label(
+                title: { Text("Converter") },
+                icon: { Image("titleImage") }
+            )
+
             List(screens, id: \.self, selection: $selection) { screen in
                 NavigationLink(screen.description, value: screen)
             } // List

@@ -19,7 +19,8 @@ struct LengthView: View {
 
     
     // 25.4 mm == 1.0 inch
-    
+    @FocusState private var inputIsFocused: Bool
+
     var output: Double {
         let inch = input / 25.4
         return inch
@@ -27,17 +28,40 @@ struct LengthView: View {
 
     
     var body: some View {
+        
+        // Use hotkey cmd-shift-L and on the star tab are symbols.
+//        Label(
+//            title: { Text("Convert") },
+//            icon: { Image(systemName: "ruler") }
+//        )
+
+        
         NavigationStack {
             Form {
                 Section(header: Text("mm").textCase(.none)) {
                     TextField("mm", value: $input, format: .number)
+                        .keyboardType(.decimalPad)
+                        .focused($inputIsFocused)
+
                 }
                 Section(header: Text("inch").textCase(.none)) {
                     Text(output, format: .number)
                 }
-            }
-        }
-    }
+            } // Form
+            .navigationTitle("Length")
+            // This does nothing
+            //.dialogIcon(Image(systemName: "ruler"))
+            // property?
+            .toolbar {
+                if inputIsFocused {
+                    Button("Done") {
+                        inputIsFocused = false
+                    }
+                } // if inputIsFocused
+            } // .toolbar
+
+        } // NavigationStack
+    } // body
     
 
 }

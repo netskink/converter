@@ -15,25 +15,46 @@ struct TempView: View {
     var subscreen: SubScreen.Screens
 
     
-    // 144 ppi == 5.6690 pixels/mm
+    // 23 C = 73.4 F
     
     @State private var input = 0.0
+    @FocusState private var inputIsFocused: Bool
     
     var output: Double {
-        let inch = input * 25.4
-        return inch
+        let fahrenheit = (input * (9.0/5.0)) + 32
+        return fahrenheit
     }
     
     var body: some View {
+        
+        // Use hotkey cmd-shift-L and on the star tab are symbols.
+        Label(
+            title: { Text("Convert") },
+            icon: { Image(systemName: "medical.thermometer") }
+        )
+
+
+        
         NavigationStack {
             Form {
-                Section(header: Text("pixels per mm").textCase(.none)) {
+                Section(header: Text("celsius").textCase(.none)) {
                     TextField("mm", value: $input, format: .number)
+                        .keyboardType(.decimalPad)
+                        .focused($inputIsFocused)
                 }
-                Section(header: Text("pixels(dot) per inch").textCase(.none)) {
+                Section(header: Text("fahrenheit").textCase(.none)) {
                     Text(output, format: .number)
                 }
             } // Form
+            .navigationTitle("Temp")
+            // property?
+            .toolbar {
+                if inputIsFocused {
+                    Button("Done") {
+                        inputIsFocused = false
+                    }
+                } // if inputIsFocused
+            } // .toolbar
         } // NavigationStack
     } // View
 
