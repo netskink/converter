@@ -19,6 +19,7 @@
 		72C72A2C2C9606B70025596A /* Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C72A2B2C9606B70025596A /* Screens.swift */; };
 		72C72A2E2C96109F0025596A /* MassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C72A2D2C96109F0025596A /* MassView.swift */; };
 		72C72A302C9610AF0025596A /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C72A2F2C9610AF0025596A /* TempView.swift */; };
+		72C72A322C9CEF7D0025596A /* SystemUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C72A312C9CEF7D0025596A /* SystemUnits.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		72C72A2B2C9606B70025596A /* Screens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens.swift; sourceTree = "<group>"; };
 		72C72A2D2C96109F0025596A /* MassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MassView.swift; sourceTree = "<group>"; };
 		72C72A2F2C9610AF0025596A /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
+		72C72A312C9CEF7D0025596A /* SystemUnits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemUnits.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				72C72A0C2C8CD7F00025596A /* converterApp.swift */,
 				72C72A0E2C8CD7F00025596A /* ContentView.swift */,
 				72C72A2B2C9606B70025596A /* Screens.swift */,
+				72C72A312C9CEF7D0025596A /* SystemUnits.swift */,
 				72C72A272C96043C0025596A /* LengthView.swift */,
 				72C72A292C9604620025596A /* ResolutionView.swift */,
 				72C72A2D2C96109F0025596A /* MassView.swift */,
@@ -176,6 +179,7 @@
 				72C72A0F2C8CD7F00025596A /* ContentView.swift in Sources */,
 				72C72A2C2C9606B70025596A /* Screens.swift in Sources */,
 				72C72A2E2C96109F0025596A /* MassView.swift in Sources */,
+				72C72A322C9CEF7D0025596A /* SystemUnits.swift in Sources */,
 				72C72A0D2C8CD7F00025596A /* converterApp.swift in Sources */,
 				72C72A2A2C9604620025596A /* ResolutionView.swift in Sources */,
 				72C72A282C96043C0025596A /* LengthView.swift in Sources */,
