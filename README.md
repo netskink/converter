@@ -10,4 +10,9 @@ The sample icon I downloaded was 5.669 x 5.669 pixels/mm.
 5.669 x 5.669 pixels/mm -> 144 dpi
 
 
+## canvas
+
+Toggle with `option-command-enter`
+
+
 * [app icon ideas](https://macosicons.com)

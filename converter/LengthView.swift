@@ -16,6 +16,8 @@ struct LengthView: View {
     var subscreen: SubScreen.Screens
     
     let possibleSystemUnits: [SystemUnits.System] = [.imperial, .metric]
+    let possibleMetricLengthUnits: [CommonLengthEnum] = [.metric(.mm), .metric(.cm), .metric(.m), .metric(.km)]
+    let possibleImperialLengthUnits: [CommonLengthEnum] = [.imperial(.inch), .imperial(.foot), .imperial(.yard), .imperial(.mile)]
 
 
     @State private var input = 0.0
@@ -23,14 +25,61 @@ struct LengthView: View {
     
     // 25.4 mm == 1.0 inch
     @FocusState private var inputIsFocused: Bool
+    // input
     @State private var inputSystem = SystemUnits.System.metric
-    @State private var outputSystem = SystemUnits.System.metric
-    @State private var inputUnit = SystemUnits.System.metric
+    @State private var inputUnit = CommonLengthEnum.metric(.mm)
+    // output
+    @State private var outputSystem = SystemUnits.System.imperial
+    @State private var outputUnit = CommonLengthEnum.imperial(.inch)
+
 
 
     var output: Double {
-        let inch = input / 25.4
-        return inch
+        
+        var intermediate: Double
+        var result: Double
+        
+        // convert all inputs to metric.mm
+        switch inputUnit {
+        case .metric(.mm):
+            intermediate = input
+        case .metric(.cm):
+            intermediate = input * 10.0
+        case .metric(.m):
+            intermediate = input * 1000
+        case .metric(.km):
+            intermediate = input * 1000000
+        case .imperial(.inch):
+            intermediate = input * 25.4
+        case .imperial(.foot):
+            intermediate = input * 304.8
+        case .imperial(.yard):
+            intermediate = input * 914.4
+        case .imperial(.mile):
+            intermediate = input * 1.609e+6
+        }
+ 
+        // convert intermediate (celsius) to variable output
+        switch outputUnit {
+        case .metric(.mm):
+            result = intermediate
+        case .metric(.cm):
+            result = intermediate / 10.0
+        case .metric(.m):
+            result = intermediate / 1000
+        case .metric(.km):
+            result = intermediate / 1000000
+        case .imperial(.inch):
+            result = intermediate / 25.4
+        case .imperial(.foot):
+            result = intermediate / 304.8
+        case .imperial(.yard):
+            result = intermediate / 914.4
+        case .imperial(.mile):
+            result = intermediate / 1.609e+6
+        }
+
+        return result
     }
 
     
@@ -57,6 +106,24 @@ struct LengthView: View {
                     }
                     .pickerStyle(.segmented)
                 }
+                //
+                // input units:  metric(mm, cm, ...) or imperial(inch, foot, ...)
+                //
+                Section(header: Text("Choose input unit").textCase(.none)) {
+                    Picker("Input unit", selection: $inputUnit) {
+                        if inputSystem == .imperial {
+                            ForEach(possibleImperialLengthUnits, id: \.self) { unit in
+                                Text(unit.description)
+                            }
+                        }
+                        if inputSystem == .metric {
+                            ForEach(possibleMetricLengthUnits, id: \.self) { unit in
+                                Text(unit.description)
+                            }
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
 
                 
                 
@@ -68,12 +135,30 @@ struct LengthView: View {
                 }
 
                 //
-                // input metric or imperial
+                // output metric or imperial
                 //
                 Section(header: Text("Choose output system").textCase(.none)) {
                     Picker("Output system", selection: $outputSystem) {
                         ForEach(possibleSystemUnits, id: \.self) { unit in
                             Text(unit.description)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+                //
+                // output units:  metric(mm, cm, ...) or imperial(inch, foot, ...)
+                //
+                Section(header: Text("Choose output unit").textCase(.none)) {
+                    Picker("Output unit", selection: $outputUnit) {
+                        if outputSystem == .imperial {
+                            ForEach(possibleImperialLengthUnits, id: \.self) { unit in
+                                Text(unit.description)
+                            }
+                        }
+                        if outputSystem == .metric {
+                            ForEach(possibleMetricLengthUnits, id: \.self) { unit in
+                                Text(unit.description)
+                            }
                         }
                     }
                     .pickerStyle(.segmented)

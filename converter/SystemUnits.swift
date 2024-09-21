@@ -9,6 +9,8 @@ import Foundation
 
 
 
+
+
 //
 // Metric or Imperial
 //
@@ -34,6 +36,9 @@ extension SystemUnits.System: Describable {
         }
     }
 }
+
+
+
 
 
 //
@@ -67,3 +72,79 @@ extension MetricLengthUnits.System: Describable {
         }
     }
 }
+
+
+
+//
+// Imperial length
+//
+struct ImperialLengthUnits: Hashable {
+    
+    enum System  {
+        case inch
+        case foot
+        case yard
+        case mile
+    }
+    
+    var screen = System.inch
+
+}
+
+extension ImperialLengthUnits.System: Describable {
+    
+    var description: String {
+        switch self {
+        case .inch:
+            return "Inch"
+        case .foot:
+            return "Foot"
+        case .yard:
+            return "Yard"
+        case .mile:
+            return "Mile"
+        }
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Common Length
+//
+
+enum CommonLengthEnum: Hashable {
+    case metric(MetricLengthUnits.System)
+    case imperial(ImperialLengthUnits.System)
+}
+
+extension CommonLengthEnum: Describable {
+    
+    var description: String {
+        switch self {
+        case .metric(.mm):
+            return "Millimeter"
+        case .metric(.cm):
+            return "Centimeter"
+        case .metric(.m):
+            return "Meter"
+        case .metric(.km):
+            return "Kilometer"
+        case .imperial(.inch):
+            return "Inch"
+        case .imperial(.foot):
+            return "Foot"
+        case .imperial(.yard):
+            return "Yard"
+        case .imperial(.mile):
+            return "Mile"
+        }
+    }
+}
+
+
+
+
+
+
