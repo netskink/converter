@@ -206,7 +206,7 @@ struct LengthView: View {
                         
                         Section(header: Text("Convert to:").textCase(.none)) {
                             Text(output, format: .number)
-                            .multilineTextAlignment(.leading)
+                            .multilineTextAlignment(.leading)  // TODO: why is this not left justified?
                         }
                     } // vstack
                 } // zstack

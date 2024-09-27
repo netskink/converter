@@ -64,35 +64,45 @@ struct TempView: View {
         
         NavigationStack {
             Form {
-                
-                Section(header: Text("Choose input units").textCase(.none)) {
-                    Picker("Input units", selection: $inputUnit) {
-                        ForEach(possibleUnits, id: \.self) { unit in
-                            Text(unit)
+                ZStack {
+                    Color.green.opacity(0.25)
+                    VStack {
+                        
+                        Section(header: Text("Choose input units").textCase(.none)) {
+                            Picker("Input units", selection: $inputUnit) {
+                                ForEach(possibleUnits, id: \.self) { unit in
+                                    Text(unit)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                        }
+                        
+                        Section(header: Text(inputUnit).textCase(.none)) {
+                            TextField("", value: $input, format: .number)
+                                .keyboardType(.decimalPad)
+                                .focused($inputIsFocused)
                         }
                     }
-                    .pickerStyle(.segmented)
                 }
-                
-                Section(header: Text(inputUnit).textCase(.none)) {
-                    TextField("", value: $input, format: .number)
-                        .keyboardType(.decimalPad)
-                        .focused($inputIsFocused)
-                }
-
-                Section(header: Text("Choose output units").textCase(.none)) {
-                    Picker("Output units", selection: $outputUnit) {
-                        ForEach(possibleUnits, id: \.self) { unit in
-                            Text(unit)
+                ZStack {
+                    Color.blue.opacity(0.25)
+                    VStack {
+                        
+                        Section(header: Text("Choose output units").textCase(.none)) {
+                            Picker("Output units", selection: $outputUnit) {
+                                ForEach(possibleUnits, id: \.self) { unit in
+                                    Text(unit)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                        }
+                        
+                        
+                        
+                        Section(header: Text(outputUnit).textCase(.none)) {
+                            Text(output, format: .number)
                         }
                     }
-                    .pickerStyle(.segmented)
-                }
-
-
-
-                Section(header: Text(outputUnit).textCase(.none)) {
-                    Text(output, format: .number)
                 }
             } // Form
             .navigationTitle("Temp")

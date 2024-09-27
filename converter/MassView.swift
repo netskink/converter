@@ -37,14 +37,26 @@ struct MassView: View {
         
         NavigationStack {
             Form {
-                Section(header: Text("kg").textCase(.none)) {
-                    TextField("kg", value: $input, format: .number)
-                        .keyboardType(.decimalPad)
-                        .focused($inputIsFocused)
-
+                ZStack {
+                    Color.green.opacity(0.25)
+                    VStack {
+                        
+                        Section(header: Text("kg").textCase(.none)) {
+                            TextField("kg", value: $input, format: .number)
+                                .keyboardType(.decimalPad)
+                                .focused($inputIsFocused)
+                            
+                        }
+                    }
                 }
-                Section(header: Text("pounds").textCase(.none)) {
-                    Text(output, format: .number)
+                ZStack {
+                    Color.blue.opacity(0.25)
+                    VStack {
+                        
+                        Section(header: Text("pounds").textCase(.none)) {
+                            Text(output, format: .number)
+                        }
+                    }
                 }
             } // Form
             .navigationTitle("Mass")

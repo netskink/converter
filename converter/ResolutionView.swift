@@ -37,16 +37,30 @@ struct ResolutionView: View {
         
         
         NavigationStack {
+            
             Form {
-                Section(header: Text("pixels per mm").textCase(.none)) {
-                    TextField("mm", value: $input, format: .number)
-                        .keyboardType(.decimalPad)
-                        .focused($inputIsFocused)
-
+                ZStack {
+                    Color.green.opacity(0.25)
+                    VStack {
+                        
+                        Section(header: Text("pixels per mm").textCase(.none)) {
+                            TextField("mm", value: $input, format: .number)
+                                .keyboardType(.decimalPad)
+                                .focused($inputIsFocused)
+                            
+                        }
+                    }
                 }
-                Section(header: Text("pixels(dot) per inch").textCase(.none)) {
-                    Text(output, format: .number)
+                ZStack {
+                    Color.blue.opacity(0.25)
+                    VStack {
+                        
+                        Section(header: Text("pixels(dot) per inch").textCase(.none)) {
+                            Text(output, format: .number)
+                        }
+                    }
                 }
+                
             } // Form
             .navigationTitle("Resolution")
             // property?
