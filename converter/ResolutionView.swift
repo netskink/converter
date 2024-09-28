@@ -29,7 +29,7 @@ struct ResolutionView: View {
         
         // Use hotkey cmd-shift-L and on the star tab are symbols.
         Label(
-            title: { Text("Convert") },
+            title: { Text("") },
             icon: { Image(systemName: "photo") }
         )
 

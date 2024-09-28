@@ -39,7 +39,9 @@ extension SystemUnits.System: Describable {
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// LENGTH
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //
 // Metric length
@@ -111,7 +113,7 @@ extension ImperialLengthUnits.System: Describable {
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 //
-// Common Length
+// Common 
 //
 
 enum CommonLengthEnum: Hashable {
@@ -144,7 +146,92 @@ extension CommonLengthEnum: Describable {
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// MASS
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//
+// Metric Mass
+//
+struct MetricMassUnits: Hashable {
+    
+    enum System  {
+        case g
+        case kg
+    }
+    
+    var screen = System.g
+
+}
+
+extension MetricMassUnits.System: Describable {
+    
+    var description: String {
+        switch self {
+        case .g:
+            return "Gram"
+        case .kg:
+            return "Kilogram"
+        }
+    }
+}
 
 
 
+//
+// Imperial Mass
+//
+struct ImperialMassUnits: Hashable {
+    
+    enum System  {
+        case oz
+        case lb
+    }
+    
+    var screen = System.oz
+
+}
+
+extension ImperialMassUnits.System: Describable {
+    
+    var description: String {
+        switch self {
+        case .oz:
+            return "Ounce"
+        case .lb:
+            return "Pound"
+        }
+    }
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Common
+//
+
+enum CommonMassEnum: Hashable {
+    case metric(MetricMassUnits.System)
+    case imperial(ImperialMassUnits.System)
+}
+
+extension CommonMassEnum: Describable {
+    
+    var description: String {
+        switch self {
+        case .metric(.g):
+            return "Gram"
+        case .metric(.kg):
+            return "Kilogram"
+        case .imperial(.oz):
+            return "Ounce"
+        case .imperial(.lb):
+            return "Pound"
+      }
+    }
+}
 
